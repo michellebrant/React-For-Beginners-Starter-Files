@@ -1,7 +1,7 @@
 import React from 'react';
 //this.props.tagline is how we insert variables in jsx
-class Header extends React.Component {
-  render(){
+
+const Header = (props) => {
     return(
    <header className="top">
    <h1>Catch
@@ -10,13 +10,15 @@ class Header extends React.Component {
    <span className="the">the</span>
    </span>
    day</h1>
-   <h5 className="tagline"><span>{this.props.tagline}</span></h5>
+   <h5 className="tagline"><span>{props.tagline}</span></h5>
 
 
    </header>
       )
-  }
-
 }
+
+
+
+
 
 export default Header;
