@@ -7,6 +7,7 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 
 import StorePicker from './components/StorePicker';
 import NotFound from './components/NotFound';
+import App from './components/App'
 
 const Root = () =>{
   return(
@@ -24,5 +25,5 @@ render(<Root/>, document.querySelector('#main'))
 
 import './css/style.css';
 
-import App from './components/App'
+
 
