@@ -10,6 +10,7 @@ class App extends React.Component {
     //getinitalState
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
     //^that binds it to the app itself!
     this.state = {
       fishes: {},
@@ -44,6 +45,16 @@ class App extends React.Component {
     });
   }
 
+addToOrder(key){
+  //take a copy of our state duh
+  const order={...this.state.order};
+  //update or add new number of fish ordered
+  order[key] = order[key] + 1 || 1;
+  //add one if you have one or just add one if there is none
+  //finally set state
+  this.setState({ order: order });
+
+}
 
   render(){
     return(
@@ -53,7 +64,9 @@ class App extends React.Component {
       <ul className='list-of-fishes'>
       {
         Object.keys(this.state.fishes)
-        .map(key => <Fish key={key} details={this.state.fishes[key]}/>)
+        //we do not use key. key = is for react
+        //so we set new variable index to key for us to use!
+        .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)
         //arrow function returns the component
       }
       </ul>
