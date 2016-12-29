@@ -44,17 +44,39 @@ class App extends React.Component {
   }
 
 //this is a special one we didnt maek up name:
+//this saves backend data for us!
   componentWillMount(){
       this.ref = base.syncState(`${this.props.params.storeId}/fishes`
         , {
           context: this,
           state: 'fishes'
-        })
+        });
+
+        const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`)
+
+    if(localStorageRef){
+      //update app component state
+      this.setState({
+          order: JSON.parse(localStorageRef)
+
+      })
+
+    }
+
+  }
+//this prevents from data loading in diff sites
+  componentWillUnmount(){
+      base.removeBinding(this.ref);
 
   }
 
-  componentWillUnmount(){
-      base.removeBinding(this.ref);
+//this saves local user data (like their order)
+//kind of like a cookie
+  componentWillUpdate(nextProps, nextState){
+    //this runs right before the app is rendered!!
+    //cannot store object in local storage, needs to be a string!
+    localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order))
+//check if there is any order in localStorage:
 
   }
 
@@ -90,7 +112,10 @@ addToOrder(key){
       }
       </ul>
       </div>
-      <Order fishes={this.state.fishes} order={this.state.order} />
+      <Order
+      fishes={this.state.fishes}
+      order={this.state.order}
+      params={this.props.params} />
       <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
 
