@@ -3,7 +3,11 @@ import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
 import Fish from './Fish';
-import sampleFishes from '../sample-fishes'
+import sampleFishes from '../sample-fishes';
+import base from '../base';
+
+
+
 class App extends React.Component {
   constructor(){
     super();
@@ -36,6 +40,21 @@ class App extends React.Component {
     this.setState({ fishes: fishes })
     //^fishes has been udpated with this variables = fishes!
     //THIS IS THE VIRTUAL DOM! you're not actually update the dom - get it?
+
+  }
+
+//this is a special one we didnt maek up name:
+  componentWillMount(){
+      this.ref = base.syncState(`${this.props.params.storeId}/fishes`
+        , {
+          context: this,
+          state: 'fishes'
+        })
+
+  }
+
+  componentWillUnmount(){
+      base.removeBinding(this.ref);
 
   }
 
