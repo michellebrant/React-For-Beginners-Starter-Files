@@ -15,6 +15,7 @@ class App extends React.Component {
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.updateFish = this.updateFish.bind(this);
     //^that binds it to the app itself!
     this.state = {
       fishes: {},
@@ -40,6 +41,13 @@ class App extends React.Component {
     this.setState({ fishes: fishes })
     //^fishes has been udpated with this variables = fishes!
     //THIS IS THE VIRTUAL DOM! you're not actually update the dom - get it?
+
+  }
+
+  updateFish(key, updatedFish){
+    const fishes = {...this.state.fishes};
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
 
   }
 
@@ -116,7 +124,9 @@ addToOrder(key){
       fishes={this.state.fishes}
       order={this.state.order}
       params={this.props.params} />
-      <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
+      <Inventory fishes={this.state.fishes} addFish={this.addFish}
+      loadSamples={this.loadSamples}
+      updateFish={this.updateFish} />
       </div>
 
       )
