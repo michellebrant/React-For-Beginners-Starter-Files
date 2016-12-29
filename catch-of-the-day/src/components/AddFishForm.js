@@ -36,6 +36,12 @@ this.fishForm.reset();
 
 }
 
+
+AddFishForm.propTypes ={
+  addFish: React.PropTypes.func.isRequired
+
+}
+
 export default AddFishForm;
 
 
