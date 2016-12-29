@@ -147,7 +147,8 @@ removeOrder(key){
       <Inventory fishes={this.state.fishes} addFish={this.addFish}
       loadSamples={this.loadSamples}
       updateFish={this.updateFish}
-      removeFish={this.removeFish} />
+      removeFish={this.removeFish}
+      storeId={this.props.params.storeId} />
       </div>
 
       )
