@@ -18,13 +18,13 @@ class Order extends React.Component {
       <li key={key}>
       <span>{count}lbs {fish.name}</span>
       <span className="price">{formatPrice(count * fish.price)}</span>
-
+       <button onClick={(e) => this.props.removeOrder(key)}>Remove Order</button>
       </li>
 
       )
   }
 
-  render(){
+  render(key){
     const orderIds = Object.keys(this.props.order);
     const total = orderIds.reduce((prevTotal, key) => {
       const fish = this.props.fishes[key];
@@ -43,7 +43,9 @@ class Order extends React.Component {
           <li className="total">
             <strong>Total:</strong>
             {formatPrice(total)}
+
            </li>
+
          </ul>
     </div>
       )

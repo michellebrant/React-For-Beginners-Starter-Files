@@ -16,6 +16,8 @@ class App extends React.Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
+    this.removeOrder = this.removeOrder.bind(this);
     //^that binds it to the app itself!
     this.state = {
       fishes: {},
@@ -50,6 +52,14 @@ class App extends React.Component {
     this.setState({ fishes });
 
   }
+
+removeFish(key){
+  const fishes = {...this.state.fishes};
+  //can't just do delete fishes because of firebase so do:
+  fishes[key] = null;
+  this.setState({ fishes });
+
+}
 
 //this is a special one we didnt maek up name:
 //this saves backend data for us!
@@ -105,6 +115,15 @@ addToOrder(key){
 
 }
 
+removeOrder(key){
+  const order = {...this.state.order};
+  delete order[key]
+  this.setState({ order })
+
+}
+
+
+
   render(){
     return(
       <div className='catch-of-the-day'>
@@ -123,10 +142,12 @@ addToOrder(key){
       <Order
       fishes={this.state.fishes}
       order={this.state.order}
-      params={this.props.params} />
+      params={this.props.params}
+      removeOrder={this.removeOrder} />
       <Inventory fishes={this.state.fishes} addFish={this.addFish}
       loadSamples={this.loadSamples}
-      updateFish={this.updateFish} />
+      updateFish={this.updateFish}
+      removeFish={this.removeFish} />
       </div>
 
       )
